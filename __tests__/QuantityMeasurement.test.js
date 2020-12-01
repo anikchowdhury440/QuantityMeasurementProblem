@@ -168,10 +168,10 @@ describe('testsForCompareLengthAndAddingLength', () => {
 })
 
 describe('testsForCompareVolumeAndAddingVolume', () => {
-    test('given1GallonAnd3.78Litres_WhenCompared_ShouldReturnTrue', async () => {
+    test('given1GallonAnd3.785Litres_WhenCompared_ShouldReturnTrue', async () => {
         const volume = new Volume();
         const gallonValue = new QuantityMeasurement(volume, volume.unit.GALLON, 1.0);
-        const litreValue = new QuantityMeasurement(volume, volume.unit.LITRE, 3.78);
+        const litreValue = new QuantityMeasurement(volume, volume.unit.LITRE, 3.785);
         await expect(gallonValue.equal(litreValue)).resolves.toBe(true);
     });
 
@@ -180,5 +180,19 @@ describe('testsForCompareVolumeAndAddingVolume', () => {
         const litreValue = new QuantityMeasurement(volume, volume.unit.LITRE, 1.0);
         const miliLitreValue = new QuantityMeasurement(volume, volume.unit.MILILITRE, 1000.0);
         await expect(litreValue.equal(miliLitreValue)).resolves.toBe(true);
+    });
+
+    test('given1GallonAnd3.78Litres_WhenAdded_ShouldReturn7.57Litres', async () => {
+        const volume = new Volume();
+        const gallonValue = new QuantityMeasurement(volume, volume.unit.GALLON, 1.0);
+        const litreValue = new QuantityMeasurement(volume, volume.unit.LITRE, 3.785);
+        await expect(gallonValue.additionOfUnits(litreValue, volume.unit.LITRE)).resolves.toBe(7.57);
+    });
+
+    test('given1LitreAnd1000miliLitres_WhenAdded_ShouldReturn2Litres', async () => {
+        const volume = new Volume();
+        const litreValue = new QuantityMeasurement(volume, volume.unit.LITRE, 1.0);
+        const miliLitreValue = new QuantityMeasurement(volume, volume.unit.MILILITRE, 1000.0);
+        await expect(litreValue.additionOfUnits(miliLitreValue, volume.unit.LITRE)).resolves.toBe(2.0);
     });
 })

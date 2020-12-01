@@ -1,7 +1,7 @@
 class Volume {
     unit = {
         LITRE : 1,
-        GALLON: 3.78,
+        GALLON: 3.785,
         MILILITRE : 0.001
     }
 
