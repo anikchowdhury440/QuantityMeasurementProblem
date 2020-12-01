@@ -87,4 +87,46 @@ describe('testsForCompareFeetAndInch', () => {
         const feetValue = new QuantityMeasurement(length, length.unit.FEET, 12.0);
         await expect(inchValue.equal(feetValue)).resolves.toBe(false)
     });
+
+    test('given3FeetAnd1Yard_WhenCompared_ShouldReturnTrue', async() => {
+        const length = new Length();
+        const feetValue = new QuantityMeasurement(length, length.unit.FEET, 3.0);
+        const yardValue = new QuantityMeasurement(length, length.unit.YARD, 1.0);
+        await expect(feetValue.equal(yardValue)).resolves.toBe(true);
+    });
+
+    test('given1FeetAnd1Yard_WhenCompared_ShouldReturnFalse', async() => {
+        const length = new Length();
+        const feetValue = new QuantityMeasurement(length, length.unit.FEET, 1.0);
+        const yardValue = new QuantityMeasurement(length, length.unit.YARD, 1.0);
+        await expect(feetValue.equal(yardValue)).resolves.toBe(false);
+    });
+
+    test('given1InchAnd1Yard_WhenCompared_ShouldReturnFalse', async() => {
+        const length = new Length();
+        const inchValue = new QuantityMeasurement(length, length.unit.INCH, 1.0);
+        const yardValue = new QuantityMeasurement(length, length.unit.YARD, 1.0);
+        await expect(inchValue.equal(yardValue)).resolves.toBe(false);
+    });
+
+    test('given1YardAnd36Inch_WhenCompared_ShouldReturnTrue', async() => {
+        const length = new Length();
+        const yardValue = new QuantityMeasurement(length, length.unit.YARD, 1.0);
+        const inchValue = new QuantityMeasurement(length, length.unit.INCH, 36.0);
+        await expect(yardValue.equal(inchValue)).resolves.toBe(true);
+    });
+
+    test('given36InchAnd1Yard_WhenCompared_ShouldReturnTrue', async() => {
+        const length = new Length();
+        const inchValue = new QuantityMeasurement(length, length.unit.INCH, 36.0);
+        const yardValue = new QuantityMeasurement(length, length.unit.YARD, 1.0);
+        await expect(inchValue.equal(yardValue)).resolves.toBe(true);
+    });
+
+    test('given1YardAnd3Feet_WhenCompared_ShouldReturnTrue', async() => {
+        const length = new Length();
+        const yardValue = new QuantityMeasurement(length, length.unit.YARD, 1.0);
+        const feetValue = new QuantityMeasurement(length, length.unit.FEET, 3.0);
+        await expect(yardValue.equal(feetValue)).resolves.toBe(true);
+    });
 })
