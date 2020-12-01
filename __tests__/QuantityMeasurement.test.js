@@ -136,4 +136,32 @@ describe('testsForCompareFeetAndInch', () => {
         const cmValue = new QuantityMeasurement(length, length.unit.CENTIMETER, 5.0);
         await expect(inchValue.equal(cmValue)).resolves.toBe(true);
     });
+
+    test('given2InchAnd2Inch_WhenAdded_ShouldReturn4Inch', async() => {
+        const length = new Length();
+        const inchValue1 = new QuantityMeasurement(length, length.unit.INCH, 2.0);
+        const inchValue2 = new QuantityMeasurement(length, length.unit.INCH, 2.0);
+        await expect(inchValue1.additionOfUnits(inchValue2, length.unit.INCH)).resolves.toBe(4.0);
+    });
+    
+    test('given1FeetAnd2Inch_WhenAdded_ShouldReturn14Inch', async() => {
+        const length = new Length();
+        const feetValue = new QuantityMeasurement(length, length.unit.FEET, 1.0);
+        const inchValue = new QuantityMeasurement(length, length.unit.INCH, 2.0);
+        await expect(feetValue.additionOfUnits(inchValue, length.unit.INCH)).resolves.toBe(14.0);
+    });
+
+    test('given1FeetAnd1Feet_WhenAdded_ShouldReturn24Inch', async() => {
+        const length = new Length();
+        const feetValue1 = new QuantityMeasurement(length, length.unit.FEET, 1.0);
+        const feetValue2 = new QuantityMeasurement(length, length.unit.FEET, 1.0);
+        await expect(feetValue1.additionOfUnits(feetValue2, length.unit.INCH)).resolves.toBe(24.0);
+    });
+
+    test('given2InchAnd2.5Centimeter_WhenAdded_ShouldReturn3Inch', async() => {
+        const length = new Length();
+        const inchValue = new QuantityMeasurement(length, length.unit.INCH, 2.0);
+        const cmValue = new QuantityMeasurement(length, length.unit.CENTIMETER, 2.5);
+        await expect(inchValue.additionOfUnits(cmValue, length.unit.INCH)).resolves.toBe(3.0);
+    });
 })

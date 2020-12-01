@@ -31,6 +31,16 @@ class QuantityMeasurement {
         })
     }
 
+    additionOfUnits(that, outputUnit) {
+        return new Promise(resolve => {
+            const firstValue = this.convertObj.convert(this.unit, this.value);
+            const secondValue = that.convertObj.convert(that.unit, that.value);
+            if(this.convertObj == that.convertObj) {
+                resolve(this.convertObj.getValueInUnit(firstValue + secondValue, outputUnit));
+            }
+        })
+    }
+
 }
 
 module.exports = QuantityMeasurement;

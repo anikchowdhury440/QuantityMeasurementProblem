@@ -10,6 +10,9 @@ class Length {
         return unitValue * value;
     }
 
+    getValueInUnit(add, unitType){
+        return add / unitType;
+    }
 }
 
 module.exports = Length;
