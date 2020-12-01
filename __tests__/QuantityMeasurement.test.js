@@ -8,5 +8,12 @@ describe('testsForCompareFeetAndInch', () => {
         const feetValue2 = new QuantityMeasurement(length, length.unit.FEET, 0.0);
         await expect(feetValue1.equal(feetValue2)).resolves.toBe(true);
     });
+
+    test('givenFeetAndInchValuesNull_WhenCompared_ShouldReturnFalse', async () => {
+        const length = new Length();
+        const feetValue = new QuantityMeasurement(length, length.unit.FEET, null);
+        const inchValue = new QuantityMeasurement(length, length.unit.INCH, null);
+        await expect(feetValue.equal(inchValue)).resolves.toBe(false);
+    });
     
 })

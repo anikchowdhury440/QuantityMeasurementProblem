@@ -9,7 +9,12 @@ class QuantityMeasurement {
 
     equal(that) {
         return new Promise(resolve => {
-            this.compare(that).then(value => resolve(value));
+            if(this.value == null || that.value == null) {
+                resolve(false);
+            }
+            else {
+                this.compare(that).then(value => resolve(value));
+            }
         })
     }
 
