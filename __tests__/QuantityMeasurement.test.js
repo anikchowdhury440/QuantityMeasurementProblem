@@ -73,4 +73,18 @@ describe('testsForCompareFeetAndInch', () => {
         const inchValue2 = new QuantityMeasurement(length, length.unit.MM, 1.0);
         await expect(inchValue1.equal(inchValue2)).resolves.toBe(false);
     });
+
+    test('givenInchAndFeetValuesAreCorrect_WhenCompared_ShouldReturnTrue', async() => {
+        const length = new Length();
+        const inchValue = new QuantityMeasurement(length, length.unit.INCH, 12.0);
+        const feetValue = new QuantityMeasurement(length, length.unit.FEET, 1.0);
+        await expect(inchValue.equal(feetValue)).resolves.toBe(true)
+    });
+
+    test('givenInchAndFeetValuesAreInCorrect_WhenCompared_ShouldReturnFalse', async() => {
+        const length = new Length();
+        const inchValue = new QuantityMeasurement(length, length.unit.INCH, 2.0);
+        const feetValue = new QuantityMeasurement(length, length.unit.FEET, 12.0);
+        await expect(inchValue.equal(feetValue)).resolves.toBe(false)
+    });
 })
