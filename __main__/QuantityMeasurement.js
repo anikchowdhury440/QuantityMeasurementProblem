@@ -1,4 +1,3 @@
-const {convert}= require('./Length')
 
 class QuantityMeasurement {
     constructor(convertObj, unit, value) {
@@ -10,6 +9,9 @@ class QuantityMeasurement {
     equal(that) {
         return new Promise(resolve => {
             if(this.value == null || that.value == null) {
+                resolve(false);
+            }
+            else if(this.convertObj != that.convertObj) {
                 resolve(false);
             }
             else {
