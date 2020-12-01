@@ -129,4 +129,11 @@ describe('testsForCompareFeetAndInch', () => {
         const feetValue = new QuantityMeasurement(length, length.unit.FEET, 3.0);
         await expect(yardValue.equal(feetValue)).resolves.toBe(true);
     });
+
+    test('given2InchAnd5Centimeter_WhenCompared_ShouldReturnTrue', async() => {
+        const length = new Length();
+        const inchValue = new QuantityMeasurement(length, length.unit.INCH, 2.0);
+        const cmValue = new QuantityMeasurement(length, length.unit.CENTIMETER, 5.0);
+        await expect(inchValue.equal(cmValue)).resolves.toBe(true);
+    });
 })
