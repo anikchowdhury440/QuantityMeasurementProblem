@@ -14,6 +14,9 @@ class QuantityMeasurement {
             else if(this.convertObj != that.convertObj) {
                 resolve(false);
             }
+            else if(this.unit == undefined || this.unit == undefined) {
+                resolve(false);
+            }
             else {
                 this.compare(that).then(value => resolve(value));
             }
