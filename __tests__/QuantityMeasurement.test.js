@@ -1,7 +1,8 @@
 const QuantityMeasurement = require('../__main__/QuantityMeasurement');
-const Length = require('../__main__/Length')
+const Length = require('../__main__/Length');
+const Volume = require('../__main__/Volume');
 
-describe('testsForCompareFeetAndInch', () => {
+describe('testsForCompareLengthAndAddingLength', () => {
     test('givenBothFeetValuesZero_WhenCompared_ShouldReturnTrue', async () => {
         const length = new Length();
         const feetValue1 = new QuantityMeasurement(length, length.unit.FEET, 0.0);
@@ -163,5 +164,21 @@ describe('testsForCompareFeetAndInch', () => {
         const inchValue = new QuantityMeasurement(length, length.unit.INCH, 2.0);
         const cmValue = new QuantityMeasurement(length, length.unit.CENTIMETER, 2.5);
         await expect(inchValue.additionOfUnits(cmValue, length.unit.INCH)).resolves.toBe(3.0);
+    });
+})
+
+describe('testsForCompareVolumeAndAddingVolume', () => {
+    test('given1GallonAnd3.78Litres_WhenCompared_ShouldReturnTrue', async () => {
+        const volume = new Volume();
+        const gallonValue = new QuantityMeasurement(volume, volume.unit.GALLON, 1.0);
+        const litreValue = new QuantityMeasurement(volume, volume.unit.LITRE, 3.78);
+        await expect(gallonValue.equal(litreValue)).resolves.toBe(true);
+    });
+
+    test('given1LitreAnd1000Mililitres_WhenCompared_ShouldReturnTrue', async () => {
+        const volume = new Volume();
+        const litreValue = new QuantityMeasurement(volume, volume.unit.LITRE, 1.0);
+        const miliLitreValue = new QuantityMeasurement(volume, volume.unit.MILILITRE, 1000.0);
+        await expect(litreValue.equal(miliLitreValue)).resolves.toBe(true);
     });
 })
