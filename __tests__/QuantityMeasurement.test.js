@@ -2,6 +2,7 @@ const QuantityMeasurement = require('../__main__/QuantityMeasurement');
 const Length = require('../__main__/Length');
 const Volume = require('../__main__/Volume');
 const Weight = require('../__main__/Weight');
+const Temperature = require('../__main__/Temperature');
 
 describe('testsForCompareLengthAndAddingLength', () => {
     test('givenBothFeetValuesZero_WhenCompared_ShouldReturnTrue', async () => {
@@ -220,4 +221,13 @@ describe('testsForCompareWeightAndAddingWeight', () => {
         await expect(tonneValue.additionOfUnits(gramValue, weight.unit.KILOGRAM)).resolves.toBe(1001.0);
     });    
 
+})
+
+describe('testsForCompareWeightAndAddingWeight', () => {
+    test('given212FarenheitAnd100Celcius_WhenCompared_ShouldReturnTrue', async () => {
+        const temperature = new Temperature();
+        const farenheitValue = new QuantityMeasurement(temperature, temperature.unit.FARENHEIT, 212.0);
+        const celciusValue = new QuantityMeasurement(temperature, temperature.unit.CELCIUS, 100.0);
+        await expect(farenheitValue.equal(celciusValue)).resolves.toBe(true);
+    });
 })
