@@ -1,6 +1,7 @@
 const QuantityMeasurement = require('../__main__/QuantityMeasurement');
 const Length = require('../__main__/Length');
 const Volume = require('../__main__/Volume');
+const Weight = require('../__main__/Weight');
 
 describe('testsForCompareLengthAndAddingLength', () => {
     test('givenBothFeetValuesZero_WhenCompared_ShouldReturnTrue', async () => {
@@ -195,4 +196,28 @@ describe('testsForCompareVolumeAndAddingVolume', () => {
         const miliLitreValue = new QuantityMeasurement(volume, volume.unit.MILILITRE, 1000.0);
         await expect(litreValue.additionOfUnits(miliLitreValue, volume.unit.LITRE)).resolves.toBe(2.0);
     });
+})
+
+describe('testsForCompareWeightAndAddingWeight', () => {
+    test('given1KilogramAnd1000Grams_WhenCompared_ShouldReturnTrue', async () => {
+        const weight = new Weight();
+        const kiloGramValue = new QuantityMeasurement(weight, weight.unit.KILOGRAM, 1.0);
+        const gramValue = new QuantityMeasurement(weight, weight.unit.GRAM, 1000.0);
+        await expect(kiloGramValue.equal(gramValue)).resolves.toBe(true);
+    });
+
+    test('given1TonneAnd1000Kilograms_WhenCompared_ShouldReturnTrue', async () => {
+        const weight = new Weight();
+        const tonneValue = new QuantityMeasurement(weight, weight.unit.TONNE, 1.0);
+        const kiloGramValue = new QuantityMeasurement(weight, weight.unit.KILOGRAM, 1000.0);
+        await expect(tonneValue.equal(kiloGramValue)).resolves.toBe(true);
+    });
+
+    test('given1TonneAnd1000Grams_WhenAdded_ShouldReturn1001Kilogram', async () => {
+        const weight = new Weight();
+        const tonneValue = new QuantityMeasurement(weight, weight.unit.TONNE, 1.0);
+        const gramValue = new QuantityMeasurement(weight, weight.unit.GRAM, 1000.0);
+        await expect(tonneValue.additionOfUnits(gramValue, weight.unit.KILOGRAM)).resolves.toBe(1001.0);
+    });    
+
 })
