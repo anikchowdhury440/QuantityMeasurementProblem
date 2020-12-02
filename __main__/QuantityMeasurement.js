@@ -11,7 +11,7 @@ class QuantityMeasurement {
             if(this.value == null || that.value == null) {
                 resolve(false);
             }
-            else if(this.convertObj != that.convertObj) {
+            else if(this.convertObj.constructor.name != that.convertObj.constructor.name) {
                 resolve(false);
             }
             else if(this.unit == undefined || this.unit == undefined) {

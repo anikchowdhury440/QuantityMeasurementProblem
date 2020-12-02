@@ -21,7 +21,7 @@ describe('testsForCompareLengthAndAddingLength', () => {
 
     test('givenFeetAndFeetValuesReferenceNotEqual_WhenCompared_ShouldReturnFalse', async () => {
         const length1 = new Length();
-        const length2 = new Length();
+        const length2 = new Volume();
         const feetValue1 = new QuantityMeasurement(length1, length1.unit.FEET, 1.0);
         const feetValue2 = new QuantityMeasurement(length2, length2.unit.FEET, 1.0);
         await expect(feetValue1.equal(feetValue2)).resolves.toBe(false);
@@ -64,7 +64,7 @@ describe('testsForCompareLengthAndAddingLength', () => {
 
     test('givenInchAndInchValuesReferenceNotEqual_WhenCompared_ShouldReturnFalse', async () => {
         const length1 = new Length();
-        const length2 = new Length();
+        const length2 = new Volume();
         const inchValue1 = new QuantityMeasurement(length1, length1.unit.INCH, 1.0);
         const inchValue2 = new QuantityMeasurement(length2, length2.unit.INCH, 1.0);
         await expect(inchValue1.equal(inchValue2)).resolves.toBe(false);
