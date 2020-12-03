@@ -1,3 +1,5 @@
+const QuantityMeasurementException = require('../__main__/QuantityManagementException');
+const ExceptionType = require('../__main__/ExceptionType');
 
 class QuantityMeasurement {
     constructor(convertObj, unit, value) {
@@ -7,15 +9,15 @@ class QuantityMeasurement {
     }
 
     equal(that) {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             if(this.value == null || that.value == null) {
-                resolve(false);
+                reject(new QuantityMeasurementException('Value Passed Null', ExceptionType.NULL_VALUE_PASSED));
             }
             else if(this.convertObj.constructor.name != that.convertObj.constructor.name) {
-                resolve(false);
+                reject(new QuantityMeasurementException('Value Passed Null', ExceptionType.REFERENCE_NOT_EQUAL));
             }
             else if(this.unit == undefined || this.unit == undefined) {
-                resolve(false);
+                reject(new QuantityMeasurementException('Value Passed Null', ExceptionType.INVALID_UNIT_TYPE));
             }
             else {
                 this.compare(that).then(value => resolve(value));
